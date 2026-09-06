@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}ModaShop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+
+<header class="encabezado">
+    <div class="contenedor barra">
+        <a href="{% url 'inicio' %}" class="logo">Moda<span>Shop</span></a>
+        
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+        
+        <nav class="menu" id="menu">
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'productos' %}">Productos</a>
+            <div class="dropdown">
+                <a href="{% url 'productos' %}" class="dropdown-btn">Categorías ▾</a>
+                <div class="dropdown-contenido">
+                    <a href="{% url 'productos' %}?categoria=mujer">Mujer</a>
+                    <a href="{% url 'productos' %}?categoria=hombre">Hombre</a>
+                    <a href="{% url 'productos' %}?categoria=ninos">Niños</a>
+                    <a href="{% url 'productos' %}?categoria=calzado">Calzado</a>
+                    <a href="{% url 'productos' %}?categoria=accesorios">Accesorios</a>
+                    <a href="{% url 'productos' %}?categoria=abrigos">Abrigos</a>
+                </div>
+            </div>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'inicio' %}#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+{% if messages %}
+<div class="mensajes">
+    {% for message in messages %}
+    <p class="mensaje {{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main>
+    {% block contenido %}
+    {% endblock %}
+</main>
+
+<footer class="pie">
+    <div class="contenedor pie-grid">
+        <div class="pie-col">
+            <h3>ModaShop</h3>
+            <p>Ropa con estilo, precios con corazón.</p>
+        </div>
+        <div class="pie-col">
+            <h4>Enlaces</h4>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'productos' %}">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+        </div>
+        <div class="pie-col">
+            <h4>Contacto</h4>
+            <p>📱 WhatsApp</p>
+            <p>📧 contacto@modashop.com</p>
+        </div>
+    </div>
+    <div class="pie-derechos">
+        <p>© 2026 ModaShop - Todos los derechos reservados</p>
+    </div>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

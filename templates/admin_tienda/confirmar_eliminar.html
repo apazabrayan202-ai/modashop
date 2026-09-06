@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar producto | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="contenedor seccion confirmar-seccion">
+    <div class="confirmar-caja">
+        <h2>¿Eliminar producto?</h2>
+        <p>Estás a punto de eliminar:</p>
+        <p class="confirmar-nombre">"{{ producto.nombre }}"</p>
+        <p class="advertencia">⚠️ Esta acción no se puede deshacer.</p>
+
+        <form method="post" class="formulario-inline">
+            {% csrf_token %}
+            <button type="submit" class="boton boton--rojo">Sí, eliminar</button>
+            <a href="{% url 'panel_productos' %}" class="boton boton--gris">Cancelar</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

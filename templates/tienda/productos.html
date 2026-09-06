@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Productos | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="contenedor seccion">
+    <h2 class="titulo-seccion">Todos los productos</h2>
+
+    <!-- Buscador -->
+    <form method="get" class="buscador" action="{% url 'productos' %}">
+        <input type="text" name="q" class="campo buscador-input" 
+               placeholder="Buscar por nombre o descripción..." value="{{ busqueda }}">
+        <button type="submit" class="boton">🔍 Buscar</button>
+        {% if busqueda %}
+            <a href="{% url 'productos' %}" class="boton boton--gris">✕ Limpiar</a>
+        {% endif %}
+    </form>
+
+    <!-- Filtros por categoría -->
+    <div class="filtros">
+        <a href="{% url 'productos' %}?{% if busqueda %}q={{ busqueda }}&{% endif %}" 
+           class="filtro {% if not categoria_actual %}activo{% endif %}">
+            Todos
+        </a>
+        {% for valor, nombre in categorias %}
+        <a href="{% url 'productos' %}?categoria={{ valor }}{% if busqueda %}&q={{ busqueda }}{% endif %}" 
+           class="filtro {% if categoria_actual == valor %}activo{% endif %}">
+            {{ nombre }}
+        </a>
+        {% endfor %}
+    </div>
+
+    <!-- Ordenamiento -->
+    <div class="ordenamiento">
+        <label>Ordenar por:</label>
+        <select id="select-orden" class="campo" onchange="cambiarOrden(this.value)">
+            <option value="recientes" {% if orden == 'recientes' %}selected{% endif %}>Más recientes</option>
+            <option value="precio_asc" {% if orden == 'precio_asc' %}selected{% endif %}>Precio: menor a mayor</option>
+            <option value="precio_desc" {% if orden == 'precio_desc' %}selected{% endif %}>Precio: mayor a menor</option>
+            <option value="nombre" {% if orden == 'nombre' %}selected{% endif %}>Nombre (A-Z)</option>
+        </select>
+    </div>
+
+    <!-- Contador de resultados -->
+    <p class="resultados">
+        {{ productos|length }} producto(s) encontrado(s)
+        {% if busqueda %}
+            para "<strong>{{ busqueda }}</strong>"
+        {% endif %}
+    </p>
+
+    <!-- Rejilla de productos -->
+    <div class="rejilla">
+        {% for producto in productos %}
+            {% include 'tienda/tarjeta_producto.html' %}
+        {% empty %}
+            <p class="vacio">
+                No se encontraron productos
+                {% if busqueda %}
+                    para "<strong>{{ busqueda }}</strong>"
+                {% endif %}
+                .
+            </p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

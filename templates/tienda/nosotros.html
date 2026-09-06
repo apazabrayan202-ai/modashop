@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Nosotros | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="contenedor seccion nosotros">
+    <h2 class="titulo-seccion">Sobre Nosotros</h2>
+
+    <div class="nosotros-grid">
+        <div class="nosotros-texto">
+            <h3>Nuestra historia</h3>
+            <p>
+                ModaShop nació en 2024 con una idea simple: ofrecer ropa de calidad 
+                a precios accesibles, sin complicaciones. Comenzamos vendiendo entre 
+                amigos y familiares, y hoy atendemos a clientes de toda la ciudad.
+            </p>
+            <p>
+                Creemos que vestir bien no debería costar una fortuna. Por eso 
+                seleccionamos cuidadosamente cada prenda, buscando la mejor relación 
+                entre calidad, estilo y precio.
+            </p>
+        </div>
+
+        <div class="nosotros-valores">
+            <div class="valor">
+                <span class="valor-icono">💎</span>
+                <h4>Calidad</h4>
+                <p>Prendas seleccionadas que duran en el tiempo.</p>
+            </div>
+            <div class="valor">
+                <span class="valor-icono">💰</span>
+                <h4>Precios justos</h4>
+                <p>Sin intermediarios, sin sobreprecios.</p>
+            </div>
+            <div class="valor">
+                <span class="valor-icono">🚀</span>
+                <h4>Entrega rápida</h4>
+                <p>Tu pedido listo en menos de 48 horas.</p>
+            </div>
+            <div class="valor">
+                <span class="valor-icono">🤝</span>
+                <h4>Atención personalizada</h4>
+                <p>Te ayudamos a elegir la talla y estilo perfectos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nosotros-stats">
+        <div class="stat">
+            <span class="stat-numero">500+</span>
+            <span class="stat-texto">Clientes felices</span>
+        </div>
+        <div class="stat">
+            <span class="stat-numero">1000+</span>
+            <span class="stat-texto">Prendas vendidas</span>
+        </div>
+        <div class="stat">
+            <span class="stat-numero">4.9⭐</span>
+            <span class="stat-texto">Calificación promedio</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

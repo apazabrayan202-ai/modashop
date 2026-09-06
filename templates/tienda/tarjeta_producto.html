@@ -1,0 +1,18 @@
+<article class="tarjeta">
+    <div class="tarjeta-img">
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+        {% else %}
+            <div class="sin-imagen">Sin imagen</div>
+        {% endif %}
+        {% if producto.agotado %}
+            <span class="etiqueta-agotado">AGOTADO</span>
+        {% endif %}
+    </div>
+    <div class="tarjeta-info">
+        <span class="categoria">{{ producto.get_categoria_display }}</span>
+        <h3>{{ producto.nombre }}</h3>
+        <p class="tallas">Tallas: {{ producto.tallas }}</p>
+        <p class="precio">Bs. {{ producto.precio }}</p>
+<a href="{% url 'detalle_producto' producto.id %}" class="boton boton--tarjeta">Ver producto</a>    </div>
+</article>

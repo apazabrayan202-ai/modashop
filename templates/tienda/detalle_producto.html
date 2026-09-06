@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{ producto.nombre }} | ModaShop{% endblock %}
+
+{% block contenido %}
+{% csrf_token %}
+<section class="contenedor seccion detalle" id="pagina-detalle"
+         data-tallas="{{ producto.tallas }}"
+         data-colores="{{ producto.colores }}"
+         data-stock="{{ producto.stock }}"
+         data-nombre="{{ producto.nombre }}"
+         data-precio="{{ producto.precio }}"
+         data-producto-id="{{ producto.id }}">
+
+   <nav class="miga">
+    <a href="{% url 'inicio' %}">Inicio</a>
+    <span>›</span>
+    <a href="{% url 'productos' %}">Productos</a>
+    <span>›</span>
+    <a href="{% url 'productos' %}?categoria={{ producto.categoria }}">{{ producto.get_categoria_display }}</a>
+    <span>›</span>
+    <span class="miga-actual">{{ producto.nombre }}</span>
+</nav>
+
+    <div class="detalle-grid">
+        <!-- Imagen -->
+  <div class="detalle-img">
+    {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+    {% else %}
+        <div class="sin-imagen">Sin imagen</div>
+    {% endif %}
+    <span class="badge-categoria">{{ producto.get_categoria_display }}</span>
+</div>
+
+        <!-- Informacion -->
+        <div class="detalle-info">
+            <span class="categoria">{{ producto.get_categoria_display }}</span>
+            <h1>{{ producto.nombre }}</h1>
+            <p class="precio-grande">Bs. {{ producto.precio }}</p>
+
+            {% if producto.agotado %}
+                <p class="stock-agotado">AGOTADO - Sin unidades disponibles</p>
+            {% else %}
+                <p class="stock-disponible">{{ producto.stock }} unidades disponibles</p>
+            {% endif %}
+
+            <p class="descripcion">{{ producto.descripcion }}</p>
+
+            <!-- Selector de talla -->
+            <div class="selector">
+                <p class="selector-titulo">Talla:</p>
+                <div class="opciones" id="selector-talla"></div>
+            </div>
+
+            <!-- Selector de color -->
+            <div class="selector">
+                <p class="selector-titulo">Color:</p>
+                <div class="opciones" id="selector-color"></div>
+            </div>
+
+            <!-- Selector de cantidad -->
+            <div class="selector">
+                <p class="selector-titulo">Cantidad:</p>
+                <div class="cantidad">
+                    <button type="button" id="btn-menos">-</button>
+                    <span id="cantidad">1</span>
+                    <button type="button" id="btn-mas">+</button>
+                </div>
+            </div>
+
+            <!-- Boton de compra (lo activamos en la Etapa 7) -->
+            {% if producto.agotado %}
+                <button class="boton boton--grande boton--whatsapp" disabled>Producto agotado</button>
+            {% else %}
+                <button class="boton boton--grande boton--whatsapp" id="btn-whatsapp" disabled>Selecciona talla y color</button>
+            {% endif %}
+        </div>
+    </div>
+</section>
+    <!-- Productos relacionados -->
+    {% if productos_relacionados %}
+    <div class="relacionados">
+        <h3 class="relacionados-titulo">Productos relacionados</h3>
+        <div class="rejilla">
+            {% for producto_rel in productos_relacionados %}
+                {% include 'tienda/tarjeta_producto.html' with producto=producto_rel %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Iniciar sesión | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="contenedor seccion login-seccion">
+    <div class="login-caja">
+        <h2>Panel de administración</h2>
+        <p>Ingresa con tu usuario y contraseña</p>
+
+        <form method="post" class="formulario">
+            {% csrf_token %}
+
+            <div class="campo-grupo">
+                <label>Usuario:</label>
+                <input type="text" name="username" class="campo" required autofocus>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Contraseña:</label>
+                <input type="password" name="password" class="campo" required>
+            </div>
+
+            {% if form.errors %}
+            <p class="error-mensaje">Usuario o contraseña incorrectos.</p>
+            {% endif %}
+
+            <button type="submit" class="boton boton--grande">Entrar</button>
+        </form>
+
+        <a href="{% url 'inicio' %}" class="volver">← Volver a la tienda</a>
+    </div>
+</section>
+{% endblock %}

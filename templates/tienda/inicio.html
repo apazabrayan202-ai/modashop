@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Inicio | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="hero">
+    <div class="contenedor">
+        <h1>Ropa con estilo, precios con corazon</h1>
+        <p>Encuentra tu proxima prenda favorita. Pedidos directos por WhatsApp.</p>
+        <a href="{% url 'productos' %}" class="boton boton--grande">Ver catalogo</a>
+    </div>
+</section>
+
+<section class="contenedor seccion">
+    <h2 class="titulo-seccion">Productos destacados</h2>
+    <div class="rejilla">
+        {% for producto in productos_destacados %}
+            {% include 'tienda/tarjeta_producto.html' %}
+        {% empty %}
+            <p class="vacio">Aun no hay productos. Agrega el primero desde el panel de administracion.</p>
+        {% endfor %}
+    </div>
+</section>
+<section class="contenedor seccion contacto" id="contacto">
+    <h2 class="titulo-seccion">Contacto</h2>
+    <div class="contacto-grid">
+        <div class="contacto-info">
+            <p>📱 WhatsApp: <strong>+591 746 35330</strong></p>
+            <p>📧 Email: <strong>contacto@modashop.com</strong></p>
+            <p>📍 Dirección: <strong>Av. Principal #123, La Paz, Bolivia</strong></p>
+        </div>
+        <div class="contacto-mensaje">
+            <p>¿Tienes dudas sobre tallas, colores o envíos?</p>
+            <p>¡Escríbenos y te respondemos lo antes posible!</p>
+            <a href="https://wa.me/59174635330?text=Hola%20ModaShop%2C%20tengo%20una%20consulta" 
+   class="boton" target="_blank">Enviar mensaje 💬</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

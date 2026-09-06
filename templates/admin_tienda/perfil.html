@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Mi perfil | ModaShop{% endblock %}
+
+{% block contenido %}
+<section class="contenedor seccion perfil-seccion">
+    <div class="perfil-caja">
+        <h2>Mi perfil</h2>
+
+        <div class="perfil-info">
+            <div class="perfil-avatar">
+                {{ usuario.username|first|upper }}
+            </div>
+            <div class="perfil-datos">
+                <p><strong>Usuario:</strong> {{ usuario.username }}</p>
+                <p><strong>Email:</strong> {{ usuario.email|default:"No registrado" }}</p>
+                <p><strong>Último acceso:</strong> {{ usuario.last_login|date:"d/m/Y H:i" }}</p>
+                <p><strong>Fecha de registro:</strong> {{ usuario.date_joined|date:"d/m/Y" }}</p>
+            </div>
+        </div>
+
+        <div class="perfil-acciones">
+            <a href="{% url 'cambiar_password' %}" class="boton boton--azul">🔒 Cambiar contraseña</a>
+            <a href="{% url 'panel_productos' %}" class="boton boton--gris">← Volver al panel</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
