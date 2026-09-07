@@ -1,0 +1,24 @@
+# Entorno virtual
+venv/
+env/
+
+# Base de datos
+db.sqlite3
+
+# Archivos de Python
+_pycache_/
+*.pyc
+*.pyo
+
+# Archivos de medios (imágenes subidas)
+media/
+
+# Archivos estáticos recolectados
+staticfiles/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Secretos
+.env
